@@ -59,7 +59,7 @@ Generally, there will be at least 3 tables provided in your warehouse containing
 --------------|------------------|-------------
  *entity_id*    | integer          | NBS artist/entity identifier 
  endpoint_id  | integer          | Identifier for network to NBS artist relationship (only helpful for support)
- metric_id    | integer          | Integer identifier associated with metric names (e.g. 'Facebook Page Likes')
+ *metric_id*    | integer          | Integer identifier associated with metric names (e.g. 'Facebook Page Likes')
  count_type   | character(1)     | One of either d (for 'delta') or t (for 'total') indicating whether or not this value was accrued over 1 day or if it is a cumulative, lifetime sum
  is_private   | boolean          | Flag indicating whether or not this data is public or if it was proprietary data provided to us
  unix_seconds | bigint           | Number of seconds since 1970-01-01 used to encode date associated with this metric value
