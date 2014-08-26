@@ -3,21 +3,23 @@ This query will generate a list of the top 100 artists with the most Shazam tags
 */
 
 SELECT
-B.entity_id,           -- NBS id for artist
-B.entity_name,         -- NBS artist name
-A.value AS total_tags  -- Total Shazam tags between 2014-06-01 and 2014-06-30
+B.entity_id,                   -- NBS id for artist
+B.entity_name,                 -- NBS artist name
+A.value AS total_tags          -- Total Shazam tags between 2014-06-01 and 2014-06-30
 FROM (
-	  SELECT entity_id, sum(value) AS value
-	  FROM timeseries_data
-	  WHERE metric_id = ( 
-	    -- Select metric id for Shazam Tags
-	    SELECT metric_id FROM metric_data WHERE network_name = 'Shazam Feed' AND metric_name = 'Tags'
-	  )
-	  -- Timestamp in table is converted from unix seconds to human readable date before filtering
-	  AND TIMESTAMP WITH Time Zone 'epoch' + unix_seconds * INTERVAL '1 second' BETWEEN '2014-06-01' and '2014-06-30'
-	  GROUP BY entity_id
-	  ORDER BY sum(value) DESC
-	  LIMIT 100
+    SELECT entity_id, sum(value) AS value
+    FROM timeseries_data
+    
+    WHERE metric_id = ( 
+        -- Select metric id for Shazam Tags
+        SELECT metric_id FROM metric_data WHERE network_name = 'Shazam Feed' AND metric_name = 'Tags'
+    )
+    
+    -- Timestamp in table is converted from unix seconds to human readable date before filtering
+    AND TIMESTAMP WITH Time Zone 'epoch' + unix_seconds * INTERVAL '1 second' BETWEEN '2014-06-01' and '2014-06-30'
+    GROUP BY entity_id
+    ORDER BY sum(value) DESC
+    LIMIT 100
 ) A
 INNER JOIN entity_data B
 ON A.entity_id = B.entity_id
