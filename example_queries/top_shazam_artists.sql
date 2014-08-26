@@ -1,4 +1,6 @@
-# This query will generate a list of the top 100 artists with the most Shazam tags between Jun. 1 2014 and Jun 30 2014
+/*
+This query will generate a list of the top 100 artists with the most Shazam tags between Jun. 1 2014 and Jun 30 2014.
+*/
 
 SELECT
 B.entity_id,           -- NBS id for artist
@@ -21,8 +23,9 @@ INNER JOIN entity_data B
 ON A.entity_id = B.entity_id
 ORDER BY A.value DESC;
 
-# Exec time: ~30 seconds
-# Returns:
+/*
+Exec time: ~30 seconds
+Returns:
 
  entity_id |    entity_name    | total_tags
 -----------+-------------------+-------------------
@@ -52,3 +55,4 @@ ORDER BY A.value DESC;
     268114 | Tiesto            |            696791
       5214 | Chris Brown       |            651843
 ... (and so on)
+*/
