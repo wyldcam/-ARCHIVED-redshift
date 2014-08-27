@@ -42,6 +42,7 @@ Generally, there will be at least 3 tables provided in your warehouse containing
  entity_name  | varchar(1024)    | NBS artist/entity name
  *entity_id*    | integer    | NBS artist/entity identifier 
  
+This table contains over 1 million different entities being tracked by NBS
  
 ####Table 'metric_data'
  
@@ -50,7 +51,26 @@ Generally, there will be at least 3 tables provided in your warehouse containing
  network_name  | varchar(128)    | Name of network associated with metric (e.g. 'Facebook')
  metric_name  | varchar(128)    | Name of metric (e.g. 'Page Likes')
  *metric_id*    | integer    | Metric integer identifier (same as timeseries\_data.metric\_id)
-
+ 
+ There are over 200 metrics available spanning data sources such as Facebook, iTunes, Google Analytics,
+ Direct POS data, Instagram, Shazam, and many more.  Here is a random sample:
+ 
+ ```sql
+ snapshot20140818=# SELECT * FROM metric_data ORDER BY random() LIMIT 10;
+  network_name   |    metric_name    | metric_id 
+-----------------+-------------------+-----------
+ ExactTarget     | Subscribers Added |       317
+ US Macmillan GA | Pageviews         |       312
+ BDS             | Rock Spins        |       212
+ Rdio            | Track Listeners   |       165
+ YouTube         | Video Raters      |       170
+ MySpace         | Friends           |         5
+ Mediabase       | Latin Spins       |       111
+ Mediabase       | Latin Audience    |       112
+ US Macmillan GA | Unique Pageviews  |       313
+ Amazon          | Album Units (Net) |       201
+(10 rows)
+```
 
 
 ####Table 'timeseries_data'
@@ -59,13 +79,14 @@ Generally, there will be at least 3 tables provided in your warehouse containing
 --------------|------------------|-------------
  *entity_id*    | integer          | NBS artist/entity identifier 
  endpoint_id  | integer          | Identifier for network to NBS artist relationship (only helpful for support)
- *metric_id*    | integer          | Integer identifier associated with metric names (e.g. 'Facebook Page Likes')
+ metric_id    | integer          | Integer identifier associated with metric names (e.g. 'Facebook Page Likes')
  count_type   | character(1)     | One of either d (for 'delta') or t (for 'total') indicating whether or not this value was accrued over 1 day or if it is a cumulative, lifetime sum
- is_private   | boolean          | Flag indicating whether or not this data is public or if it was proprietary data provided to us
+ is_private   | boolean          | Flag indicating whether or not this data is public or if it was provided through some proprietary agreement 
  unix_seconds | bigint           | Number of seconds since 1970-01-01 used to encode date associated with this metric value
  value        | double precision | Metric value
  
- 
+This table contains over 2 billion data points and consists of all timeseries data tracked by NBS between Jan. 1st, 2014 and Aug. 15th, 2014.
+
 ## Basic Navigation
 
 Once connected to a psql shell, here are some common operations that can be done:
