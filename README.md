@@ -1,4 +1,4 @@
-Next Big Sound Data Warehousing (via Redshift)
+NBS Data Warehousing (via Redshift)
 ============
 
 This repository contains example queries and usage info for Next Big Sound data warehouses hosted within the Amazon Redshift service.
