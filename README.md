@@ -86,7 +86,7 @@ snapshot20140818=# select * from metric_data order by random() limit 10;
  
 This table contains over 2 billion data points and consists of all timeseries data tracked by NBS between Jan. 1st, 2014 and Aug. 15th, 2014.
 
-## Basic Operations
+## Example Operations
 
 Once connected to a psql shell, here are some common operations that can be done:
 
@@ -189,8 +189,6 @@ ORDER BY A.value DESC;
 (10 rows)
 ```
 
-
-
-
+There are many, many different types of queries beyond just those above, and the [Query Examples](query_examples) in this repository should help to give a sense of other possibilities.
 
 
