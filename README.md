@@ -55,7 +55,7 @@ This table contains over 1 million different entities being tracked by NBS
  There are over 200 metrics available spanning data sources such as Facebook, iTunes, Google Analytics,
  Direct POS data, Instagram, Shazam, and many more.  Here is a random sample:
  
- ```sql
+ ```
  snapshot20140818=# SELECT * FROM metric_data ORDER BY random() LIMIT 10;
   network_name   |    metric_name    | metric_id 
 -----------------+-------------------+-----------
