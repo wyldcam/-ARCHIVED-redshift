@@ -190,7 +190,7 @@ ORDER BY A.value DESC;
 ```
 
 
-There are many, many different types of queries beyond just those above, and the [Query Examples](example_queries) in this repository should help to give a sense of other possibilities.
+There are many, many different types of queries possible beyond just those above, and the [Query Examples](example_queries) in this repository should help to give a sense of some other possibilities.
 
 
 
