@@ -52,8 +52,13 @@ This table contains over 1 million different entities currently being tracked by
  metric_name  | varchar(128)    | Name of metric (e.g. 'Page Likes')
  *metric_id*    | integer    | Metric integer identifier (same as timeseries\_data.metric\_id)
  
- There are over 200 metrics available spanning data sources such as Facebook, iTunes, Google Analytics,
- Direct POS data, Instagram, Shazam, and many more.  Here is a random sample:
+ There are over 200 metrics available spanning data sources such as:
+  - _Social_ - Facebook, Instagram, Twitter, YouTube, etc.
+  - _Web_ - Google Analytics, Sitecatalyst
+  - _Sales_ - iTunes, Amazon, etc.
+  - _Radio_ - Mediabase (terrestrial), Spotify, Rdio, etc.
+
+Here is a random sample:
  
  ```
 snapshot20140818=# select * from metric_data order by random() limit 10;
