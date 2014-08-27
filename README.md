@@ -119,7 +119,7 @@ snapshot20140818=# \d+ timeseries_data
 Has OIDs: yes
 ```
 
-- Selecting data for a single artist -- in this case, the query is for Usher's radio spin data over some recent week:
+- Selecting data for a single artist -- in this case the query is for Charli XCX's SoundCloud play numbers over some recent week:
 
 ```sql
 SELECT
@@ -128,26 +128,26 @@ value
 FROM timeseries_data 
 WHERE entity_id = (
     SELECT entity_id FROM entity_data 
-    WHERE entity_name = 'Usher'
+    WHERE entity_name = 'Charli XCX'
 )
 AND metric_id = (
     SELECT metric_id FROM metric_data 
-    WHERE network_name = 'Mediabase Feed'
-    AND metric_name = 'Radio Spins'
+    WHERE network_name = 'SoundCloud'
+    AND metric_name = 'Plays'
 )
 AND count_type = 'd'
-ORDER BY unix_seconds
+ORDER BY unix_seconds DESC
+LIMIT 7
 
         date         | value 
 ---------------------+-------
- 2014-08-15 00:00:00 |  1801
- 2014-08-14 00:00:00 |  1873
- 2014-08-13 00:00:00 |  1894
- 2014-08-12 00:00:00 |  1945
- 2014-08-11 00:00:00 |  2053
- 2014-08-10 00:00:00 |  1818
- 2014-08-09 00:00:00 |  2077
-(7 rows)
+ 2014-08-15 00:00:00 | 19762
+ 2014-08-14 00:00:00 | 20432
+ 2014-08-13 00:00:00 | 20110
+ 2014-08-12 00:00:00 | 20125
+ 2014-08-11 00:00:00 | 19814
+ 2014-08-10 00:00:00 | 18849
+ 2014-08-09 00:00:00 | 19110
 ```
 
 - Selecting the 10 artists with the most radio spins so far in 2014
