@@ -42,7 +42,7 @@ Generally, there will be at least 3 tables provided in your warehouse containing
  entity_name  | varchar(1024)    | NBS artist/entity name
  *entity_id*    | integer    | NBS artist/entity identifier 
  
-This table contains over 1 million different entities being tracked by NBS
+This table contains over 1 million different entities currently being tracked by NBS
  
 ####Table 'metric_data'
  
@@ -56,20 +56,19 @@ This table contains over 1 million different entities being tracked by NBS
  Direct POS data, Instagram, Shazam, and many more.  Here is a random sample:
  
  ```
- snapshot20140818=# SELECT * FROM metric_data ORDER BY random() LIMIT 10;
-  network_name   |    metric_name    | metric_id 
------------------+-------------------+-----------
- ExactTarget     | Subscribers Added |       317
- US Macmillan GA | Pageviews         |       312
- BDS             | Rock Spins        |       212
- Rdio            | Track Listeners   |       165
- YouTube         | Video Raters      |       170
- MySpace         | Friends           |         5
- Mediabase       | Latin Spins       |       111
- Mediabase       | Latin Audience    |       112
- US Macmillan GA | Unique Pageviews  |       313
- Amazon          | Album Units (Net) |       201
-(10 rows)
+snapshot20140818=# select * from metric_data order by random() limit 10;
+     network_name     |     metric_name     | metric_id 
+----------------------+---------------------+-----------
+ WeeklyBookSalesUnits | Barnes & Noble      |       323
+ iTunes               | Video Units (Net)   |       137
+ Mediabase            | Pop Audience        |       116
+ Direct POS           | Total Units         |       179
+ Last.fm              | Listeners           |         9
+ Facebook Insights    | Consumptions        |       193
+ Wikipedia            | Pageviews           |        41
+ YouTube Analytics    | Viewer Percentage   |       274
+ iTunes               | Track Units (Promo) |       338
+ BarnesDailySales     | All Sales Units     |       304
 ```
 
 
