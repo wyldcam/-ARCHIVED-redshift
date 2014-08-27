@@ -155,21 +155,21 @@ LIMIT 7
  2014-08-09 00:00:00 | 19110
 ```
 
-- Selecting the 10 artists with the most radio spins so far in 2014
+- Selecting the 10 artists with the most Twitter followers so far in 2014
 
 ```sql
 SELECT
-B.entity_id,                   -- NBS id for artist
-B.entity_name,                 -- NBS artist name
-A.value AS total_spins         -- Total radio spins between 2014-06-01 and 2014-06-30
+B.entity_id,                      -- NBS id for artist
+B.entity_name,                    -- NBS artist name
+round(A.value) AS total_followers -- Total followers gained between 2014-06-01 and 2014-06-30
 FROM (
     SELECT entity_id, sum(value) AS value
     FROM timeseries_data
-    
+
     WHERE metric_id = ( 
-        -- Select metric id for Shazam Tags
+        -- Select metric id for Twitter Followers
         SELECT metric_id FROM metric_data 
-        WHERE network_name = 'Mediabase Feed' AND metric_name = 'Radio Spins'
+        WHERE network_name = 'Twitter' AND metric_name = 'Followers'
     )
     GROUP BY entity_id
     ORDER BY sum(value) DESC
@@ -179,18 +179,18 @@ INNER JOIN entity_data B
 ON A.entity_id = B.entity_id
 ORDER BY A.value DESC;
 
- entity_id |    entity_name    | total_spins 
------------+-------------------+-------------
-       652 | Katy Perry        |     1663387
-    341735 | Lorde             |     1101168
-       451 | Justin Timberlake |      937937
-        63 | OneRepublic       |      934766
-     78821 | Pharrell          |      929457
-      4153 | John Legend       |      882424
-       942 | Maroon 5          |      807211
-    286413 | Bruno Mars        |      801399
-     13786 | Jason Derulo      |      758181
-    194289 | Imagine Dragons   |      749061
+ entity_id |    entity_name    | total_followers 
+-----------+-------------------+-----------------
+       652 | Katy Perry        |     11888000556
+     13455 | Justin Bieber     |     11600234088
+     25167 | Barack Obama      |      9693752032
+      8859 | YouTube           |      9386136472
+       659 | Lady Gaga         |      9378098318
+       143 | Taylor Swift      |      9164097823
+      5774 | Britney Spears    |      8370927576
+      2104 | Rihanna           |      7961606092
+    339704 | Instagram         |      7307233594
+       451 | Justin Timberlake |      7219574293
 (10 rows)
 ```
 
