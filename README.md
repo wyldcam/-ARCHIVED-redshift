@@ -86,7 +86,7 @@ snapshot20140818=# select * from metric_data order by random() limit 10;
  
 This table contains over 2 billion data points and consists of all timeseries data tracked by NBS between Jan. 1st, 2014 and Aug. 15th, 2014.
 
-## Basic Navigation
+## Basic Operations
 
 Once connected to a psql shell, here are some common operations that can be done:
 
@@ -119,9 +119,9 @@ snapshot20140818=# \d+ timeseries_data
 Has OIDs: yes
 ```
 
-- Selecting Mediabase data for Usher over some recent week:
+- Selecting data for a single artist -- in this case, the query is for Usher's radio spin data over some recent week:
 
-```
+```sql
 SELECT
 TIMESTAMP WITH Time Zone 'epoch' + unix_seconds * INTERVAL '1 second' date,
 value
@@ -149,6 +149,47 @@ ORDER BY unix_seconds
  2014-08-09 00:00:00 |  2077
 (7 rows)
 ```
+
+- Selecting the 10 artists with the most radio spins so far in 2014
+
+```sql
+SELECT
+B.entity_id,                   -- NBS id for artist
+B.entity_name,                 -- NBS artist name
+A.value AS total_spins         -- Total radio spins between 2014-06-01 and 2014-06-30
+FROM (
+    SELECT entity_id, sum(value) AS value
+    FROM timeseries_data
+    
+    WHERE metric_id = ( 
+        -- Select metric id for Shazam Tags
+        SELECT metric_id FROM metric_data 
+        WHERE network_name = 'Mediabase Feed' AND metric_name = 'Radio Spins'
+    )
+    GROUP BY entity_id
+    ORDER BY sum(value) DESC
+    LIMIT 10
+) A
+INNER JOIN entity_data B
+ON A.entity_id = B.entity_id
+ORDER BY A.value DESC;
+
+ entity_id |    entity_name    | total_spins 
+-----------+-------------------+-------------
+       652 | Katy Perry        |     1663387
+    341735 | Lorde             |     1101168
+       451 | Justin Timberlake |      937937
+        63 | OneRepublic       |      934766
+     78821 | Pharrell          |      929457
+      4153 | John Legend       |      882424
+       942 | Maroon 5          |      807211
+    286413 | Bruno Mars        |      801399
+     13786 | Jason Derulo      |      758181
+    194289 | Imagine Dragons   |      749061
+(10 rows)
+```
+
+
 
 
 
