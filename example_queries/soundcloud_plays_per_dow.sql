@@ -1,5 +1,5 @@
 /*
-This query will calculate the average number of Spotify streams per day of week (i.e. Mon, Tue, Wed, etc.)
+This query will calculate the average number of SoundCloud track plays per day of week (i.e. Mon, Tue, Wed, etc.)
 */
 
 
@@ -17,7 +17,7 @@ INSERT INTO dow VALUES
 -- Compute averages per day number and join to mapping above
 SELECT 
 B.day_name,
-A.average_streams
+A.average_plays
 FROM (
     SELECT
     -- Determine day of week number from unix seconds timestamp
@@ -25,8 +25,8 @@ FROM (
     avg(value) AS average_streams
     FROM timeseries_data 
     WHERE metric_id = (
-        -- Get metric id for Spotify streams (aka 'Plays')
-        SELECT metric_id FROM metric_data WHERE network_name = 'Spotify Feed' AND metric_name = 'Plays'
+        -- Get metric id for SoundCloud track plays
+        SELECT metric_id FROM metric_data WHERE network_name = 'SoundCloud' AND metric_name = 'Plays'
     )
     GROUP BY day_of_week
 ) A
@@ -38,14 +38,14 @@ ORDER BY A.day_of_week;
 Exec Time: ~20 seconds
 Returns:
 
- day_name  | average_streams  
+ day_name  | average_plays  
 -----------+------------------
- Sunday    | 1530.99179543757
- Monday    | 1728.70416121657
- Tuesday   | 1786.62796599267
- Wednesday | 1797.51284836113
- Thursday  | 1814.03093763506
- Friday    | 1863.78802569902
- Saturday  | 1672.2431746271
+ Sunday    | 36565.8932738619
+ Monday    | 36782.7322500095
+ Tuesday   | 36918.4746420169
+ Wednesday | 36716.1385097271
+ Thursday  | 36848.9883889145
+ Friday    | 36828.3448396568
+ Saturday  | 36447.2542176543
 (7 rows)
 */
