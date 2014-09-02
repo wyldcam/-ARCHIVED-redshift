@@ -200,6 +200,6 @@ There are many, many different types of queries possible beyond just those above
 
 ## Getting Help 
 
-The SQL dialect used by Redshift is derived from Postgres SQL and is [fully documented here](http://docs.aws.amazon.com/redshift/latest/dg/c_redshift-and-postgres-sql.html).  In our experience though, very little that works for Postgres doesn't work with redshift so looking for help in the [Postgres SQL Documentation](http://www.postgresql.org/docs/9.3/interactive/tutorial-sql.html) is generally just as effective.
+The SQL dialect used by Redshift is derived from PostgreSQL and is [fully documented here](http://docs.aws.amazon.com/redshift/latest/dg/c_redshift-and-postgres-sql.html).  In our experience though, very little that works for Postgres doesn't work with redshift so looking for help in the [PostgreSQL Documentation](http://www.postgresql.org/docs/9.3/interactive/tutorial-sql.html) is generally just as effective.
 
 
