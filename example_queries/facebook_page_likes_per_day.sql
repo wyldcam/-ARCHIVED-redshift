@@ -8,7 +8,7 @@ TIMESTAMP WITH Time Zone 'epoch' + unix_seconds * INTERVAL '1 second' AS date,
 round(sum(value)) AS total_fb_page_likes
 FROM timeseries_data
 WHERE metric_id = (
-    -- Select metric id for itunes tracks
+    -- Select metric id for Facebook Page Likes
     SELECT metric_id FROM metric_data WHERE network_name = 'Facebook' AND metric_name = 'Page Likes'
 )
 -- Need to restrict results to daily changes, not lifetime totals
